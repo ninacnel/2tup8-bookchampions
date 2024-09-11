@@ -3,9 +3,9 @@ import PropTypes from "prop-types";
 import './CommentItem.css';
 
 
-const CommentItem = ({ author, content, date }) => {
+const CommentItem = ({ author, content, date, lastComment }) => {
     return (
-        <Card>
+        <Card className={lastComment && "custom-shadow"}>
             <Card.Body className="bg-body-tertiary">
                 <Card.Title>{author}</Card.Title>
                 <Card.Text>{content}</Card.Text>
@@ -22,6 +22,7 @@ CommentItem.propTypes = {
     author: PropTypes.string,
     content: PropTypes.string,
     date: PropTypes.string,
+    lastComment: PropTypes.bool,
 };
 
 
