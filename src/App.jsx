@@ -2,6 +2,7 @@ import { useState } from "react";
 import Books from "./components/books/Books";
 import NewBook from "./components/newBook/NewBook";
 import Login from "./components/form/Login";
+import Comments from "./components/comments/Comments";
 
 const BOOKS = [
   {
@@ -60,7 +61,8 @@ function App() {
       <p>¡Quiero leer libros!</p>
       {/* <NewBook onBookDataSaved={saveBookDataHandler} />
       <Books books={books} /> */}
-      <Login/>
+      {/* <Login/> */}
+      <Comments/>
     </div>
   );
 }
