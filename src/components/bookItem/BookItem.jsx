@@ -1,12 +1,25 @@
 import PropTypes from "prop-types";
 import { useState } from "react";
 import { Button, Card } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 
-const BookItem = ({ titleProp, author, pageCount, rating, imageUrl }) => {
+const BookItem = ({ id, summary, titleProp, author, pageCount, rating, imageUrl }) => {
   const [title, setTitle] = useState(titleProp);
 
+  const navigate = useNavigate();
+
   const clickHandle = () => {
-    setTitle("Actualizado");
+    setTitle(title);
+    navigate(`/book/${id}`, {
+      state: {
+       title,
+       summary,
+       author,
+       pageCount,
+       rating,
+       imageUrl, 
+      }
+    });
   };
 
   return (
@@ -22,7 +35,7 @@ const BookItem = ({ titleProp, author, pageCount, rating, imageUrl }) => {
         <div>{rating} estrellas</div>
         <p>{pageCount} páginas</p>
         <Button variant="primary" onClick={clickHandle}>
-          Actualizar
+          Ver info
         </Button>
       </Card.Body>
     </Card>
@@ -35,6 +48,8 @@ BookItem.propTypes = {
   pageCount: PropTypes.number,
   rating: PropTypes.number,
   imageUrl: PropTypes.string,
+  id: PropTypes.number,
+  summary: PropTypes.string,
 };
 
 export default BookItem;

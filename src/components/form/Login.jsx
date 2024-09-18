@@ -1,7 +1,10 @@
 import { useRef, useState } from "react";
 import { Button, Card, Col, Form, FormGroup, Row } from "react-bootstrap";
+import PropTypes from "prop-types";
+import { useNavigate } from "react-router-dom";
 
-const Login = () => {
+
+const Login = ({ onLogin }) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [errors, setErrors] = useState({
@@ -11,6 +14,8 @@ const Login = () => {
 
     const emailRef = useRef(null);
     const passwordRef = useRef(null);
+
+    const navigate = useNavigate();
 
     const emailHandler = (event) => {
         setEmail(event.target.value);
@@ -39,6 +44,8 @@ const Login = () => {
         }
 
         alert(`Email: ${email} password: ${password}`);
+        onLogin();
+        navigate("/comments");
     };
 
   return (
@@ -82,5 +89,8 @@ const Login = () => {
   );
 };
 
+Login.propTypes = {
+  onLogin: PropTypes.func,
+}
 
 export default Login;

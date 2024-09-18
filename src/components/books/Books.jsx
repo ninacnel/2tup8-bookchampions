@@ -14,11 +14,13 @@ const Books = ({ books }) => {
       {books.map((book) => (
         <BookItem
           key={book.id}
+          id={book.id}
           titleProp={book.bookTitle}
           author={book.author}
           rating={book.bookRating.length}
           pageCount={book.pageCount}
           imageUrl={book.imageUrl}
+          summary={book.summary}
         />
       ))}
     </div>
