@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button, Card, Col, Form, Row } from "react-bootstrap";
 import PropTypes from "prop-types";
 
@@ -8,6 +8,24 @@ const NewBook = ({ onBookDataSaved }) => {
   const [enteredRating, setEnteredRating] = useState("");
   const [enteredPageCount, setEnteredPageCount] = useState("");
   const [enteredImageUrl, setEnteredImageUrl] = useState("");
+  const [formValid, setFormValid]=useState(false);
+
+  useEffect(()=>{
+    const timer = setTimeout(() => {
+      console.log("FETCH");
+      setFormValid(
+        enteredTitle !== "" &&
+          enteredAuthor !== "" &&
+          enteredPageCount !== "" &&
+          enteredRating !== ""
+      );
+    }, 500);
+
+    return () => {
+      console.log("Cleanup");
+      clearTimeout(timer);
+    };
+  }, [enteredTitle, enteredAuthor, enteredPageCount, enteredRating]);
 
   const changeTitleHandler = (event) => {
     setEnteredTitle(event.target.value);
@@ -119,7 +137,7 @@ const NewBook = ({ onBookDataSaved }) => {
           </Row>
           <Row className="justify-content-end">
             <Col md={3} className="d-flex justify-content-end">
-              <Button variant="primary" type="submit">
+              <Button disabled={!formValid} variant="primary" type="submit">
                 Agregar lectura
               </Button>
             </Col>
