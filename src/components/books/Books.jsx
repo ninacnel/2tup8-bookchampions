@@ -16,7 +16,7 @@ const Books = ({ books }) => {
           key={book.id}
           id={book.id}
           titleProp={book.bookTitle}
-          author={book.author}
+          author={book.bookAuthor}
           rating={book.bookRating.length}
           pageCount={book.pageCount}
           imageUrl={book.imageUrl}
