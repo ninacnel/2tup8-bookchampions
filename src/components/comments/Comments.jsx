@@ -2,6 +2,7 @@ import { useRef, useState } from "react";
 import { Container, Row, Col, Button } from "react-bootstrap";
 import { comments } from "../../data/data";
 import CommentItem from "./CommentItem";
+import { useNavigate } from "react-router-dom";
 
 const Comments = () => {
     const [allComments, setAllComments] = useState(comments);
@@ -9,6 +10,8 @@ const Comments = () => {
 
     const commentRef = useRef(null);
     const topRef = useRef(null);
+
+    const navigate = useNavigate();
 
     const lastCommentHandler = () => {
         if(commentRef.current){
@@ -34,6 +37,10 @@ const Comments = () => {
         setAllComments([newComment, ...allComments]);
     };
 
+    const backToHomeHandler = () =>{
+        navigate("/");
+    };
+
     return (
         <Container>
             <h2 ref={topRef}>Comment Section</h2>
@@ -50,6 +57,14 @@ const Comments = () => {
                 onClick={addCommentHandler}
             >
                 Add new comment
+            </Button>
+            <Button
+                style={{backgroundColor: "pink"}}
+                variant="outline-info"
+                className="mb-4"
+                onClick={backToHomeHandler}
+            >
+                HOME
             </Button>
             <Row>
                 {allComments.map((c, index) => (

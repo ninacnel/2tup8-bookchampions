@@ -17,7 +17,7 @@ const BookDetails = () => {
 
 
   return (
-    <Card className="my-3 w-25">
+    <Card>
       <Card.Img
         height={400}
         variant="top"
