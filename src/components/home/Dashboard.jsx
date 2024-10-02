@@ -60,8 +60,15 @@ const Dashboard = () => {
           }
         })
         .then(() => {
+          const bookMapped = {
+            bookTitle: bookData.title,
+            bookAuthor: bookData.author,
+            pageCount: bookData.pagesAmount,
+            imageUrl: bookData.imageUrl,
+            bookRating: bookData.rating,
+          };
           const newBooksArray = [
-            { ...bookData, bookRating: enteredBookData.bookRating },
+            { ...bookMapped, bookRating: enteredBookData.bookRating },
             ...booksFiltered,
           ];
           setBooksFiltered(newBooksArray);

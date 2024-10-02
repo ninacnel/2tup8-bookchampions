@@ -5,6 +5,7 @@ import Comments from "./components/comments/Comments";
 import Protected from "./components/routes/Protected";
 import BookDetails from "./components/bookDetails/BookDetails";
 import NotFound from "./components/routes/NotFound";
+import ReadingList from "./components/readingList/ReadingList";
 
 function App() {
   const router = createBrowserRouter([
@@ -16,6 +17,7 @@ function App() {
       </Protected>
     )},
     { path: "/book/:id", element: <BookDetails/>},
+    { path: "/reading", element: <ReadingList/>},
     { path: "*", element: <NotFound/>}
   ]);
 
