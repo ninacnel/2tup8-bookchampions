@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 import BookItem from "../bookItem/BookItem";
 
-const Books = ({ books }) => {
+const Books = ({ books, onDelete }) => {
   return (
     <div
       style={{
@@ -21,6 +21,7 @@ const Books = ({ books }) => {
           pageCount={book.pageCount}
           imageUrl={book.imageUrl}
           summary={book.summary}
+          onDelete={onDelete}
         />
       ))}
     </div>

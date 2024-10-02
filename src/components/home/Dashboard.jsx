@@ -68,7 +68,19 @@ const Dashboard = () => {
         });
     };
   
-  
+    const deleteBookHandle = (id) => {
+      fetch(`https://localhost:7120/api/Book/${id}`, {
+        method: "DELETE",
+        headers: {
+          accept: "application/json",
+          "Authorization": `Bearer ${localStorage.getItem("bookchampions-token")}`
+        },
+      })
+      .then(()=>{
+        const updatedBooks = booksFiltered.filter((book)=> book.id !== id);
+        setBooksFiltered(updatedBooks);
+      })
+    };
   
     const searchHandler = (searchInput) => {
       if (searchInput === "") setBooksFiltered(allBooks);
@@ -89,7 +101,7 @@ const Dashboard = () => {
         <h3>Count: {count}</h3>
         <Button onClick={()=>setCount(count+1)}>Rerender</Button>
         <NewBook onBookDataSaved={saveBookDataHandler} />
-        <Books onSearch={searchHandler} books={booksFiltered} />
+        <Books onSearch={searchHandler} books={booksFiltered} onDelete={deleteBookHandle}/>
       </div>
     );
   };

@@ -3,7 +3,7 @@ import { useState } from "react";
 import { Button, Card } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 
-const BookItem = ({ id, summary, titleProp, author, pageCount, rating, imageUrl }) => {
+const BookItem = ({ id, summary, titleProp, author, pageCount, rating, imageUrl, onDelete }) => {
   const [title, setTitle] = useState(titleProp);
 
   const navigate = useNavigate();
@@ -37,6 +37,9 @@ const BookItem = ({ id, summary, titleProp, author, pageCount, rating, imageUrl 
         <Button variant="primary" onClick={clickHandle}>
           Ver info
         </Button>
+        <Button variant="danger" onClick={()=>onDelete(id)}>
+          Eliminar
+        </Button>
       </Card.Body>
     </Card>
   );
@@ -50,6 +53,7 @@ BookItem.propTypes = {
   imageUrl: PropTypes.string,
   id: PropTypes.number,
   summary: PropTypes.string,
+  onDelete: PropTypes.func,
 };
 
 export default BookItem;
