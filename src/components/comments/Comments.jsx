@@ -1,12 +1,15 @@
 import { useRef, useState } from "react";
-import { Container, Row, Col, Button } from "react-bootstrap";
+import { Container, Row, Col, Button, Form } from "react-bootstrap";
 import { comments } from "../../data/data";
 import CommentItem from "./CommentItem";
 import { useNavigate } from "react-router-dom";
+import Greeting from "./Greeting";
 
 const Comments = () => {
     const [allComments, setAllComments] = useState(comments);
     const [highlightComment, setHighlightComment] = useState(false);
+    const [newComment, setNewComment] = useState("");
+    const [name, setName] = useState("");
 
     const commentRef = useRef(null);
     const topRef = useRef(null);
@@ -28,13 +31,18 @@ const Comments = () => {
     };
 
     const addCommentHandler = () => {
-        let newComment = {
+        if (newComment.trim() === "") return;
+        if (name.trim() === "") return;
+
+        let comment = {
             id: allComments.length + 1,
-            author: "LucasRodriguez",
-            content: "Nostrud exercitation ullamco",
-            date: "07/05/24:18:18:18",
+            author: name,
+            content: newComment,
+            date: new Date().toISOString(),
         };
-        setAllComments([newComment, ...allComments]);
+
+        setAllComments([comment, ...allComments]);
+        setNewComment("");
     };
 
     const backToHomeHandler = () =>{
@@ -66,6 +74,23 @@ const Comments = () => {
             >
                 HOME
             </Button>
+            <Row className="mb-4">
+                <h6>Agregar comentario</h6>
+                <Form.Control
+                    type="text"
+                    placeholder="Write a comment"
+                    value={newComment}
+                    onChange={(e) => setNewComment(e.target.value)}
+                />
+                <h6>Tu nombre:</h6>
+                <Form.Control
+                    type="text"
+                    placeholder="Write your name"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                />
+                <Greeting/>
+            </Row>
             <Row>
                 {allComments.map((c, index) => (
                     <Col

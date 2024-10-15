@@ -30,6 +30,7 @@ const Books = ({ books, onDelete }) => {
 
 Books.propTypes = {
   books: PropTypes.array,
+  onDelete: PropTypes.func,
 };
 
 export default Books;
