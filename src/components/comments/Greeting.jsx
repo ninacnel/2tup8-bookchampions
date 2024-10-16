@@ -1,15 +1,14 @@
 /* eslint-disable react/display-name */
-import { memo } from "react";
-
 
 import PropTypes from "prop-types";
+import { memo } from "react";
 
-const Greeting = memo(({name}) => {
-    console.log("In Greeting")
+const Greeting = memo(() => {
+    console.log("In GREETING COMPONENT")
   return (
-    <h2 className="border bg-info">Hola {name}, bienvenido</h2>
+    <h2 className="border bg-info">Hola, bienvenido a la seccion de comentarios.</h2>
   )
-},null)
+}, null);
 
 export default Greeting;
 

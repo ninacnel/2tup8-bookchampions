@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import Books from "../books/Books";
 import NewBook from "../newBook/NewBook";
 import { Button } from "react-bootstrap";
@@ -85,17 +85,11 @@ const Dashboard = () => {
     });
   };
 
-  const expensiveComputation = useMemo(() => {
-    console.log("Computing...");
-    return count * 2; 
-  }, [count]);
-
   return (
     <div className="d-flex flex-column align-items-center">
       <h2>Books Champion App</h2>
       <p>¡Quiero leer libros!</p>
       <h3>Count: {count}</h3>
-      <h4>Computing result: {expensiveComputation}</h4>
       <Button onClick={() => setCount(count + 1)}>Rerender</Button>
       <NewBook onBookDataSaved={saveBookDataHandler} />
       <Books books={booksFiltered} onDelete={deleteBookHandle} />
