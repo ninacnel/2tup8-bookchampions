@@ -43,6 +43,7 @@ const Comments = () => {
 
         setAllComments([comment, ...allComments]);
         setNewComment("");
+        setName("");
     };
 
     const backToHomeHandler = () =>{

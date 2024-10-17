@@ -2,16 +2,16 @@ import PropTypes from "prop-types";
 import { Button, Card } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import ReserveButton from "../reserveButton/ReserveButton";
-import { useCallback, useState } from "react";
+import { useState } from "react";
 
 const BookItem = ({ id, summary, titleProp, author, pageCount, rating, imageUrl, onDelete }) => {
   const [title, setTitle] = useState(titleProp);
 
   const navigate = useNavigate();
 
-  const reserveHandler = useCallback(() => {
+  const reserveHandler = () => {
     alert(`Libro ${title} reservado!`);
-  }, [title]);
+  };
 
   const clickHandle = () => {
     setTitle(title);
