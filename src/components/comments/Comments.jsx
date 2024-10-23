@@ -90,7 +90,7 @@ const Comments = () => {
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                 />
-                <Greeting/>
+                <Greeting name={name}/>
             </Row>
             <Row>
                 {allComments.map((c, index) => (
