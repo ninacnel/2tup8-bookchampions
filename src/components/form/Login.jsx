@@ -32,6 +32,7 @@ const Login = () => {
     }
 
     const loginHandler =(event) => {
+      console.log("executed")
         event.preventDefault();
         if (emailRef.current.value.length === 0) {
             setErrors({ ...errors, email: true});
@@ -83,7 +84,7 @@ const Login = () => {
   
 
   return (
-    <Card className="mt-5 mx-3 p-3 px-5 shadow">
+    <Card className="w-25 mt-5 mx-3 p-3 px-5 shadow">
       <Card.Body>
         <Row>
           <h5>¡Bienvenidos a Books Champion!</h5>

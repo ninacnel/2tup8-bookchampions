@@ -41,6 +41,18 @@ export const allBooks = [
   },
 ];
 
+export const allProducts = [
+  { id: 1, name: "Shirt", amount: 34, category: "Clothes", price: 999 },
+  { id: 2, name: "Soda", amount: 344, category: "Food", price: 94 },
+  { id: 3, name: "Laptop", amount: 5, category: "Electronics", price: 49999 },
+  { id: 4, name: "Book", amount: 112, category: "Stationery", price: 299 },
+  { id: 5, name: "Coffee Mug", amount: 87, category: "Kitchen", price: 199 },
+  { id: 6, name: "Pants", amount: 42, category: "Clothes", price: 1299 },
+  { id: 7, name: "Headphones", amount: 20, category: "Electronics", price: 2999 },
+  { id: 8, name: "Cookies", amount: 150, category: "Food", price: 150 },
+  { id: 9, name: "Backpack", amount: 30, category: "Accessories", price: 1899 },
+  { id: 10, name: "Water Bottle", amount: 200, category: "Sports", price: 249 }
+];
 
 export const comments = [
     {

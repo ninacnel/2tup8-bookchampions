@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import Books from "../books/Books";
 import NewBook from "../newBook/NewBook";
 import { Button } from "react-bootstrap";
-
 const Dashboard = () => {
   const [booksFiltered, setBooksFiltered] = useState([]);
   const [count, setCount] = useState(0);
