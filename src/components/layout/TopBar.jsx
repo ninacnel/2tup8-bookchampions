@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom'
 const TopBar = () => {
   const navigate = useNavigate();
   return (
-    <Navbar expand="lg" className="bg-body-tertiary">
+    <Navbar expand="lg" className="bg-body-tertiary w-100">
     <Container>
       <Navbar.Brand href="#home">Book Champions</Navbar.Brand>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />

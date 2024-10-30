@@ -3,6 +3,7 @@ import { Button, Card } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import ReserveButton from "../reserveButton/ReserveButton";
 import { useCallback, useState } from "react";
+import PriceInput from "../priceInput/PrinceInput";
 
 const BookItem = ({ id, summary, titleProp, author, pageCount, rating, imageUrl, onDelete }) => {
   const [title, setTitle] = useState(titleProp);
@@ -39,6 +40,7 @@ const BookItem = ({ id, summary, titleProp, author, pageCount, rating, imageUrl,
         <Card.Subtitle>{author}</Card.Subtitle>
         <div>{rating} estrellas</div>
         <p>{pageCount} páginas</p>
+        <PriceInput/>
         <Button variant="primary" onClick={clickHandle}>
           Ver info
         </Button>
