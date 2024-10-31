@@ -1,5 +1,6 @@
 import { Container, Nav, Navbar, NavDropdown } from 'react-bootstrap'
 import { useNavigate } from 'react-router-dom'
+import ToggleTheme from '../toggleTheme/ToggleTheme';
 
 const TopBar = () => {
   const navigate = useNavigate();
@@ -23,6 +24,7 @@ const TopBar = () => {
               Separated link
             </NavDropdown.Item>
           </NavDropdown>
+          <ToggleTheme/>
         </Nav>
       </Navbar.Collapse>
     </Container>
