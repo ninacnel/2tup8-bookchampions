@@ -1,12 +1,31 @@
 import PropTypes from "prop-types";
-import { useState } from "react";
 import { Button, Card } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
+import ReserveButton from "../reserveButton/ReserveButton";
+import { useCallback, useState } from "react";
+import PriceInput from "../priceInput/PrinceInput";
 
-const BookItem = ({ titleProp, author, pageCount, rating, imageUrl }) => {
+const BookItem = ({ id, summary, titleProp, author, pageCount, rating, imageUrl, onDelete }) => {
   const [title, setTitle] = useState(titleProp);
 
+  const navigate = useNavigate();
+
+  const reserveHandler = useCallback(() => {
+    alert(`Libro ${title} reservado!`);
+  }, [title]);
+
   const clickHandle = () => {
-    setTitle("Actualizado");
+    setTitle(title);
+    navigate(`/book/${id}`, {
+      state: {
+       title,
+       summary,
+       author,
+       pageCount,
+       rating,
+       imageUrl, 
+      }
+    });
   };
 
   return (
@@ -21,9 +40,14 @@ const BookItem = ({ titleProp, author, pageCount, rating, imageUrl }) => {
         <Card.Subtitle>{author}</Card.Subtitle>
         <div>{rating} estrellas</div>
         <p>{pageCount} páginas</p>
+        <PriceInput/>
         <Button variant="primary" onClick={clickHandle}>
-          Actualizar
+          Ver info
         </Button>
+        <Button variant="danger" onClick={()=>onDelete(id)}>
+          Eliminar
+        </Button>
+        <ReserveButton onClick={reserveHandler}/>
       </Card.Body>
     </Card>
   );
@@ -35,6 +59,9 @@ BookItem.propTypes = {
   pageCount: PropTypes.number,
   rating: PropTypes.number,
   imageUrl: PropTypes.string,
+  id: PropTypes.number,
+  summary: PropTypes.string,
+  onDelete: PropTypes.func,
 };
 
 export default BookItem;

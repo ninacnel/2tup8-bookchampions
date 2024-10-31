@@ -1,54 +1,111 @@
-import { useState } from "react";
+import { useEffect, useReducer, useState } from "react";
 import { Button, Card, Col, Form, Row } from "react-bootstrap";
 import PropTypes from "prop-types";
 
+const initialBookForm = {
+  title: "",
+  author: "",
+  rating: "",
+  pageCount: "",
+  imageUrl: "",
+  formValid: false,
+};
+
+const bookFormReducer = (state, action) => {
+switch (action.type) {
+  case "UPDATE_TITLE": 
+  return {
+    ...state,
+    title: action.value,
+    formValid: action.value && state.author && state.rating && state.pageCount && state.imageUrl,
+  };
+  case "UPDATE_AUTHOR": 
+  return {
+    ...state,
+    author: action.value,
+    formValid: action.value && state.title && state.rating && state.pageCount && state.imageUrl,
+  };
+  case "UPDATE_RATING": 
+  return {
+    ...state,
+    rating: action.value,
+    formValid: action.value && state.author && state.title && state.pageCount && state.imageUrl,
+  };
+  case "UPDATE_PAGECOUNT": 
+  return {
+    ...state,
+    pageCount: action.value,
+    formValid: action.value && state.author && state.rating && state.title && state.imageUrl,
+  };
+  case "UPDATE_IMAGE": 
+  return {
+    ...state,
+    imageUrl: action.value,
+    formValid: action.value && state.author && state.rating && state.pageCount && state.title,
+  };
+  case "RESET_FORM":
+    return initialBookForm;
+  default: 
+  return state;
+}
+};
+
 const NewBook = ({ onBookDataSaved }) => {
-  const [enteredTitle, setEnteredTitle] = useState("");
-  const [enteredAuthor, setEnteredAuthor] = useState("");
-  const [enteredRating, setEnteredRating] = useState("");
-  const [enteredPageCount, setEnteredPageCount] = useState("");
-  const [enteredImageUrl, setEnteredImageUrl] = useState("");
+  const [bookForm, dispatch] = useReducer(bookFormReducer, initialBookForm);
 
   const changeTitleHandler = (event) => {
-    setEnteredTitle(event.target.value);
+    dispatch({
+      type: "UPDATE_TITLE",
+      value: event.target.value,
+    });
   };
 
   const changeAuthorHandler = (event) => {
-    setEnteredAuthor(event.target.value);
+    dispatch({
+      type: "UPDATE_AUTHOR",
+      value: event.target.value,
+    });
   };
 
   const changeRatingHandler = (event) => {
-    setEnteredRating(event.target.value);
+    dispatch({
+      type: "UPDATE_RATING",
+      value: event.target.value,
+    });
   };
 
   const changePageCountHandler = (event) => {
-    setEnteredPageCount(event.target.value);
+    dispatch({
+      type: "UPDATE_PAGECOUNT",
+      value: event.target.value,
+    });
   };
 
   const changeImageUrlHandler = (event) => {
-    setEnteredImageUrl(event.target.value);
+    dispatch({
+      type: "UPDATE_IMAGE",
+      value: event.target.value,
+    });
   };
 
   const submitBookHandler = (event) => {
     event.preventDefault();
     const bookData = {
-      bookTitle: enteredTitle,
-      bookAuthor: enteredAuthor,
+      bookTitle: bookForm.title,
+      bookAuthor: bookForm.author,
       bookRating:
-        enteredRating !== ""
-          ? Array(parseInt(enteredRating, 10)).fill("*")
+        bookForm.rating !== ""
+          ? Array(parseInt(bookForm.rating, 10)).fill("*")
           : Array(0),
-      pageCount: parseInt(enteredPageCount, 10),
-      imageUrl: enteredImageUrl,
+      pageCount: parseInt(bookForm.pageCount, 10),
+      imageUrl: bookForm.imageUrl,
     };
 
     onBookDataSaved(bookData);
 
-    setEnteredTitle("");
-    setEnteredAuthor("");
-    setEnteredRating("");
-    setEnteredPageCount("");
-    setEnteredImageUrl("");
+    dispatch({
+      type: "RESET_FORM",
+    })
   };
 
   return (
@@ -63,7 +120,7 @@ const NewBook = ({ onBookDataSaved }) => {
                   type="text"
                   placeholder="Ingresar título"
                   onChange={changeTitleHandler}
-                  value={enteredTitle}
+                  value={bookForm.title}
                 />
               </Form.Group>
             </Col>
@@ -74,7 +131,7 @@ const NewBook = ({ onBookDataSaved }) => {
                   onChange={changeAuthorHandler}
                   type="text"
                   placeholder="Ingresar autor"
-                  value={enteredAuthor}
+                  value={bookForm.author}
                 />
               </Form.Group>
             </Col>
@@ -86,7 +143,7 @@ const NewBook = ({ onBookDataSaved }) => {
                 <Form.Control
                   type="number"
                   onChange={changeRatingHandler}
-                  value={enteredRating}
+                  value={bookForm.rating}
                   placeholder="Ingresar cantidad de estrellas"
                   max={5}
                   min={0}
@@ -98,7 +155,7 @@ const NewBook = ({ onBookDataSaved }) => {
                 <Form.Label>Cantidad de páginas</Form.Label>
                 <Form.Control
                   onChange={changePageCountHandler}
-                  value={enteredPageCount}
+                  value={bookForm.pageCount}
                   type="number"
                   placeholder="Ingresar cantidad de páginas"
                   min={1}
@@ -111,7 +168,7 @@ const NewBook = ({ onBookDataSaved }) => {
               <Form.Label>URL de imagen</Form.Label>
               <Form.Control
                 onChange={changeImageUrlHandler}
-                value={enteredImageUrl}
+                value={bookForm.imageUrl}
                 type="text"
                 placeholder="Ingresar url de imagen"
               />
@@ -119,7 +176,7 @@ const NewBook = ({ onBookDataSaved }) => {
           </Row>
           <Row className="justify-content-end">
             <Col md={3} className="d-flex justify-content-end">
-              <Button variant="primary" type="submit">
+              <Button disabled={!bookForm.formValid} variant="primary" type="submit">
                 Agregar lectura
               </Button>
             </Col>

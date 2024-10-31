@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 import BookItem from "../bookItem/BookItem";
 
-const Books = ({ books }) => {
+const Books = ({ books, onDelete }) => {
   return (
     <div
       style={{
@@ -14,11 +14,14 @@ const Books = ({ books }) => {
       {books.map((book) => (
         <BookItem
           key={book.id}
+          id={book.id}
           titleProp={book.bookTitle}
-          author={book.author}
+          author={book.bookAuthor}
           rating={book.bookRating.length}
           pageCount={book.pageCount}
           imageUrl={book.imageUrl}
+          summary={book.summary}
+          onDelete={onDelete}
         />
       ))}
     </div>
@@ -27,6 +30,7 @@ const Books = ({ books }) => {
 
 Books.propTypes = {
   books: PropTypes.array,
+  onDelete: PropTypes.func,
 };
 
 export default Books;
