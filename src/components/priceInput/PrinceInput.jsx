@@ -3,6 +3,7 @@ import useCurrencyFormatter from '../hooks/useCurrencyConverter';
 
 const PriceInput = () => {
   const [price, setPrice] = useState(500);
+
   const formatToCurrency = useCurrencyFormatter();
 
   const handleChange = (e) => {
